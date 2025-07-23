@@ -2,28 +2,35 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-
 const API_URL = process.env.REACT_APP_API_URL;
 
 const Users = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    console.log("API_URL:", API_URL); // Debug: Check API URL
     axios
       .get(`${API_URL}/`)
-      .then((result) => setUsers(result.data))
-      .catch((err) => console.log(err));
+      .then((result) => {
+        console.log("Fetched users:", result.data); // Debug: See fetched data
+        setUsers(result.data);
+      })
+      .catch((err) => {
+        console.log("Fetch error:", err); // Debug: See error
+      });
   }, []);
 
   const handleDelete = (id) => {
     axios
       .delete(`${API_URL}/deleteUser/` + id)
       .then((res) => {
-        console.log(res);
-        window.location.reload();
+        console.log("Delete response:", res);
+        // Remove deleted user from state instead of reloading the page
+        setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Delete error:", err));
   };
+
   return (
     <div className="d-flex vh-100 justify-content-center align-items-center">
       <div className="w-75">
@@ -54,8 +61,12 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody className="align-middle">
-                {users.map((user) => {
-                  return (
+                {users.length === 0 ? (
+                  <tr>
+                    <td colSpan="4">No users found.</td>
+                  </tr>
+                ) : (
+                  users.map((user) => (
                     <tr key={user._id}>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
@@ -69,14 +80,14 @@ const Users = () => {
                         </Link>
                         <button
                           className="btn btn-danger"
-                          onClick={(e) => handleDelete(user._id)}
+                          onClick={() => handleDelete(user._id)}
                         >
                           Delete
                         </button>
                       </td>
                     </tr>
-                  );
-                })}
+                  ))
+                )}
               </tbody>
             </table>
           </div>
