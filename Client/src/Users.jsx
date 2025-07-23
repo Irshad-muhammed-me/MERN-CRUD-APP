@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
   useEffect(() => {
     console.log("API_URL:", API_URL); // Debug: Check API URL
@@ -18,7 +17,7 @@ const Users = () => {
       .catch((err) => {
         console.log("Fetch error:", err); // Debug: See error
       });
-  }, []);
+  }, [API_URL]);
 
   const handleDelete = (id) => {
     axios
