@@ -11,7 +11,7 @@ const Users = () => {
     axios
       .get(`${API_URL}/`)
       .then((result) => {
-        console.log("Fetched users:", result.data); // Debug: See fetched data
+        console.log("Fetched users:", result.data); 
         setUsers(result.data);
       })
       .catch((err) => {
