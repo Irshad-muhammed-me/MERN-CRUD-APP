@@ -51,6 +51,7 @@ const UpdateUser = () => {
                   placeholder="Enter Name"
                   className="form-control"
                   value={name}
+                  required
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -64,6 +65,7 @@ const UpdateUser = () => {
                   placeholder="Enter Email"
                   className="form-control"
                   value={email}
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -77,6 +79,7 @@ const UpdateUser = () => {
                   placeholder="Enter Age"
                   className="form-control"
                   value={age}
+                  required
                   onChange={(e) => setAge(e.target.value)}
                 />
               </div>

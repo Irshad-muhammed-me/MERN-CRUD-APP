@@ -37,6 +37,7 @@ const CreateUser = () => {
                   id="name"
                   placeholder="Enter Name"
                   className="form-control"
+                  required
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -49,6 +50,7 @@ const CreateUser = () => {
                   id="email"
                   placeholder="Enter Email"
                   className="form-control"
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -61,6 +63,7 @@ const CreateUser = () => {
                   id="age"
                   placeholder="Enter Age"
                   className="form-control"
+                  required
                   onChange={(e) => setAge(e.target.value)}
                 />
               </div>
